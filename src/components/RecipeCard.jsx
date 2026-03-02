@@ -1,16 +1,16 @@
 import MatchBar from "./MatchBar";
 
-export default function RecipeCard({ recipe, index }) {
+export default function RecipeCard({ recipe, index, onClick }) {
   const pct = Math.round(recipe.match_percentage);
   const missing = recipe.missing_ingredients || [];
   const perfect = pct === 100;
 
   return (
     <div
-      className="animate-card-in card-hover relative bg-stone-900 border border-stone-800 rounded-2xl p-5 cursor-default overflow-hidden"
+      className="animate-card-in card-hover relative bg-stone-900 border border-stone-800 rounded-2xl p-5 cursor-pointer overflow-hidden"
       style={{ animationDelay: `${index * 0.06}s` }}
+      onClick={() => onClick(recipe)}
     >
-      {/* Top accent bar */}
       <div className="card-bar-accent absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-yellow-400 to-orange-500" />
 
       <h3 className="font-display text-base font-bold text-stone-100 mb-3 leading-snug">
@@ -42,6 +42,11 @@ export default function RecipeCard({ recipe, index }) {
           </div>
         </div>
       )}
+
+      {/* Click hint */}
+      <p className="mt-3 text-xs text-stone-600 flex items-center gap-1">
+        <span>👆</span> Tap untuk lihat cara masak
+      </p>
     </div>
   );
 }
